@@ -45,7 +45,7 @@ export const signUp = async (
             `Failed to delete user with id ${newUser._id}: ${error?.message}`,
           );
         }
-      }, 60000);
+      }, 1200000);
       res.status(201).json({
         success: true,
         message: "Otp created successfully",
