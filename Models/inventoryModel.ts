@@ -16,10 +16,22 @@ const inventorySchema: Schema = new mongoose.Schema({
     type: String,
     
   },
+  price:{
+    type:Number
+  },
   quantity: {
     type: String,
     required: true,
   },
+  category:{
+    type:String
+  },
+  userId:{
+    type:String
+  },
+  image:{
+    type:String
+  }
  
  
  

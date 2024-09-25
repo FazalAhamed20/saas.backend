@@ -94,7 +94,8 @@ export const verify = async (
 
       const data={
         name:newUser.username,
-        isAdmin:newUser.isAdmin
+        isAdmin:newUser.isAdmin,
+        UserId:newUser._id
       }
       const accessToken = generateAccessToken({
         _id: String(newUser._id),
@@ -165,7 +166,8 @@ export const login = async (
 
       const data={
         name:findUser.username,
-        isAdmin:findUser.isAdmin
+        isAdmin:findUser.isAdmin,
+        UserId:findUser._id
       }
 
       const accessToken = generateAccessToken({

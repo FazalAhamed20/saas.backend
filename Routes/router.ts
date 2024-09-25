@@ -17,9 +17,13 @@ router.get('/authenticate',jwtMiddleware, authController.auth);
 
 
 router.post('/add-item',jwtMiddleware, inventoryController.addItem);
-router.get('/fetchAll-products',jwtMiddleware, inventoryController.fetchAllProducts);
+router.post('/add-product', inventoryController.addProduct);
+router.post('/fetchAll-items',jwtMiddleware, inventoryController.fetchAllProducts);
+router.get('/fetchAll-products',jwtMiddleware, inventoryController.fetchallItems);
+router.get('/fetchAll-categories',jwtMiddleware, inventoryController.fetchAllCategories);
 router.post('/edit-item',jwtMiddleware, inventoryController.editItem);
 router.post('/delete-item',jwtMiddleware, inventoryController.deleteItem);
+
 
 
 
