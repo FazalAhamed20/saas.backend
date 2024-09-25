@@ -42,7 +42,7 @@ export const jwtMiddleware = async (req: Request, res: Response, next: NextFunct
         if (!user && refresh_token) {
             try {
                 user = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET!) as UserPayload;
-                console.log(user);
+              
                 
 
                
@@ -66,7 +66,7 @@ export const jwtMiddleware = async (req: Request, res: Response, next: NextFunct
                 return res.status(401).json({ message: "Invalid refresh token" });
             }
         }
-console.log(req.cookies);
+
 
       
         if (!user) {

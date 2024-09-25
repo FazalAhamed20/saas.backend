@@ -23,7 +23,7 @@ router.get('/fetchAll-products',jwtMiddleware, inventoryController.fetchallItems
 router.get('/fetchAll-categories',jwtMiddleware, inventoryController.fetchAllCategories);
 router.post('/edit-item',jwtMiddleware, inventoryController.editItem);
 router.post('/delete-item',jwtMiddleware, inventoryController.deleteItem);
-
+router.delete('/delete-products/:id',jwtMiddleware, inventoryController.deleteProducts);
 
 
 

@@ -161,10 +161,18 @@ export const addProduct = async (
   try {
     console.log('items',req.body);
     const { name, category, image } = req.body;
-    const existProduct = await Addproduct.findOne({ productName: name });
+    const existProduct = await Addproduct.findOne({ name: name });
+    console.log("existed",existProduct);
+    
+
     if (existProduct) {
-      throw new Error("Already exist");
+      res.status(409).json({
+        success: false,
+        message: 'Product Already Exists',
+      });
+      return;
     }
+   
 
     await Addproduct.create(req.body);
 
@@ -210,6 +218,38 @@ export const fetchAllCategories = async (
       success: true,
       message: "Product fetched successfully",
       data: { categories },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const deleteProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const deleteId=req.params.id
+    console.log(deleteId);
+    
+
+    const deleteProduct = await Addproduct.findByIdAndDelete({ _id: deleteId });
+    console.log(deleteProduct);
+
+    if (!deleteProduct) {
+      res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+      return;
+    }
+    await deleteImageCloudinary(deleteProduct.image)
+
+    res.status(200).json({
+      success: true,
+      message: "Product deleted successfully",
     });
   } catch (error) {
     next(error);
