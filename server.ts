@@ -28,7 +28,7 @@ app.use('/backend/Public', express.static(path.join(__dirname, 'Public')));
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://saas-frontend-three-lovat.vercel.app',
     credentials: true,
  
    
