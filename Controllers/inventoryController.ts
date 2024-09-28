@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import Inventory from "../Models/inventoryModel";
 import Addproduct from "../Models/addProductModel";
 import { deleteImageCloudinary } from "../Helpers/cloudinary/delete";
+import Order from "../Models/orderModel";
 
 export const addItem = async (
   req: Request,
@@ -255,3 +256,62 @@ export const deleteProducts = async (
     next(error);
   }
 };
+
+export const orders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+
+    const { _id, ...updateData } = req.body;
+   await Inventory.findByIdAndUpdate(
+      _id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+    
+    await Order.create(updateData,)
+
+    
+
+    res.status(200).json({
+      success: true,
+      message: "Ordered successfully",
+     
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const fetchOrders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+
+
+    console.log(req.body);
+    
+
+   const {userId}=req.body
+
+   const orders = await Order.find({ userId: userId });
+
+   console.log(orders);
+   
+    
+
+    res.status(200).json({
+      success: true,
+      message: "Fetch Ordered successfully",
+      data:orders
+     
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
